@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bective 2 Mixed League 2026 — Performance Review</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2F5EE;
+    --card:#FFFFFF;
+    --ink:#0B2117;
+    --ink-60:rgba(11,33,23,0.62);
+    --ink-35:rgba(11,33,23,0.35);
+    --ink-12:rgba(11,33,23,0.12);
+    --lime:#D5E94A;
+    --court:#1B5C3B;
+    --court-08:rgba(27,92,59,0.08);
+    --track:#E9EDE1;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .page{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 28px 80px;
+  }
+
+  h1,h2,h3{ font-family:'Big Shoulders Display', sans-serif; letter-spacing:0.01em; }
+
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  /* ---------- NET DIVIDER (signature element) ---------- */
+  .net-divider{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:56px 0 34px;
+  }
+  .net-divider .line{
+    flex:1;
+    height:0;
+    border-top:2px dashed var(--ink-35);
+  }
+  .net-divider .post{
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--court);
+    flex:0 0 auto;
+  }
+  .net-divider .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-60);
+    white-space:nowrap;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:64px 0 40px;
+    border-bottom:2px dashed var(--ink-12);
+  }
+  .hero-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--court);
+    background:var(--court-08);
+    padding:6px 12px;
+    border-radius:99px;
+    margin-bottom:22px;
+  }
+  .hero-eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--lime); border:1.5px solid var(--court); }
+
+  .hero h1{
+    font-size:clamp(40px, 6.5vw, 68px);
+    font-weight:800;
+    line-height:0.96;
+    color:var(--ink);
+    max-width:820px;
+  }
+  .hero h1 .accent{ color:var(--court); }
+
+  .hero .subline{
+    margin-top:22px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    max-width:560px;
+  }
+  .hero .subline p{
+    font-size:15px;
+    color:var(--ink-60);
+    font-weight:500;
+  }
+  .hero .subline p strong{ color:var(--ink); font-weight:700; }
+
+  .court-strip{
+    margin-top:34px;
+    height:8px;
+    border-radius:99px;
+    background:repeating-linear-gradient(
+      90deg,
+      var(--court) 0px, var(--court) 46px,
+      var(--lime) 46px, var(--lime) 54px,
+      var(--court) 54px, var(--court) 100px
+    );
+    opacity:0.9;
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--court);
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .section-title{
+    font-size:clamp(26px, 4vw, 36px);
+    font-weight:700;
+    color:var(--ink);
+    margin-bottom:10px;
+  }
+  .section-desc{
+    font-size:14.5px;
+    color:var(--ink-60);
+    max-width:600px;
+    margin-bottom:28px;
+  }
+
+  /* ---------- CARD ---------- */
+  .card{
+    background:var(--card);
+    border:1px solid var(--ink-12);
+    border-radius:14px;
+    padding:24px;
+  }
+
+  /* ---------- STAT GRID (Section 1) ---------- */
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:14px;
+    margin-bottom:20px;
+  }
+  .stat-card{
+    background:var(--card);
+    border:1px solid var(--ink-12);
+    border-radius:14px;
+    padding:20px 18px;
+  }
+  .stat-card .stat-label{
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-60);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .stat-card .stat-value{
+    font-family:'Big Shoulders Display', sans-serif;
+    font-weight:800;
+    font-size:38px;
+    color:var(--ink);
+    line-height:1;
+  }
+  .stat-card .stat-value.lost{ color:var(--ink-35); }
+  .stat-card .stat-value.win{ color:var(--court); }
+
+  .matches-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:var(--card);
+    border:1px solid var(--ink-12);
+    border-radius:14px;
+    padding:20px 24px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .matches-row .rl{ font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-60); font-weight:600; margin-bottom:8px;}
+  .matches-row .rv{ font-family:'Big Shoulders Display'; font-weight:800; font-size:28px; }
+  .balls{ display:flex; gap:8px; }
+  .balls .ball{ width:20px; height:20px; border-radius:50%; border:2px solid var(--court); }
+  .balls .ball.won{ background:var(--lime); }
+  .balls .ball.pending{ background:transparent; opacity:0.35; }
+
+  .insight-callout{
+    background:var(--court);
+    color:#F2F5EE;
+    border-radius:14px;
+    padding:22px 26px;
+    font-size:14.5px;
+    line-height:1.6;
+    position:relative;
+  }
+  .insight-callout .il-label{
+    font-family:'IBM Plex Mono';
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--lime);
+    font-weight:600;
+    margin-bottom:8px;
+    display:block;
+  }
+  .insight-callout b{ color:var(--lime); }
+
+  /* ---------- TABLE (Section 2) ---------- */
+  .table-wrap{
+    background:var(--card);
+    border:1px solid var(--ink-12);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  table{ width:100%; border-collapse:collapse; }
+  thead th{
+    text-align:left;
+    font-family:'IBM Plex Mono';
+    font-size:10.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-60);
+    font-weight:600;
+    padding:14px 16px;
+    border-bottom:1px solid var(--ink-12);
+    background:var(--track);
+  }
+  tbody td{
+    padding:14px 16px;
+    font-size:13.5px;
+    border-bottom:1px solid var(--ink-12);
+    vertical-align:middle;
+  }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.rank{ font-family:'Big Shoulders Display'; font-weight:800; font-size:18px; color:var(--ink-35); }
+  td.pair-name{ font-weight:700; color:var(--ink); }
+  .status-pill{
+    display:inline-block;
+    font-family:'IBM Plex Mono';
+    font-size:10px;
+    letter-spacing:0.04em;
+    padding:4px 9px;
+    border-radius:99px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .status-established{ background:var(--court-08); color:var(--court); }
+  .status-nominated{ background:rgba(213,233,74,0.35); color:#5c6412; }
+  .status-substitute{ background:var(--track); color:var(--ink-60); border:1px solid var(--ink-12); }
+  .status-alternate{ background:var(--track); color:var(--ink-60); border:1px dashed var(--ink-35); }
+
+  .mini-bar-wrap{ display:flex; align-items:center; gap:10px; min-width:150px; }
+  .mini-bar-track{ flex:1; height:8px; background:var(--track); border-radius:99px; overflow:hidden; }
+  .mini-bar-fill{ height:100%; background:var(--court); border-radius:99px; }
+  .mini-bar-pct{ font-family:'IBM Plex Mono'; font-size:12.5px; font-weight:600; width:44px; text-align:right; }
+
+  .status-explain{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-top:18px;
+  }
+  .status-explain .se-item{
+    font-size:12px;
+    color:var(--ink-60);
+    line-height:1.5;
+  }
+  .status-explain .se-item b{ color:var(--ink); display:block; margin-bottom:3px; font-size:12.5px; }
+
+  /* ---------- SECTION 3: contribution stacked bar ---------- */
+  .contrib-bar{
+    display:flex;
+    width:100%;
+    height:54px;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:22px;
+    border:1px solid var(--ink-12);
+  }
+  .contrib-seg{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'IBM Plex Mono';
+    font-size:11px;
+    font-weight:600;
+    color:var(--ink);
+    border-right:1px solid rgba(242,245,238,0.6);
+    overflow:hidden;
+    white-space:nowrap;
+  }
+  .contrib-legend{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+  }
+  .contrib-legend .cl-item{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-size:12.5px;
+    padding:10px 12px;
+    background:var(--card);
+    border:1px solid var(--ink-12);
+    border-radius:10px;
+  }
+  .contrib-legend .sw{ width:12px; height:12px; border-radius:3px; flex:0 0 auto; }
+  .contrib-legend .cl-num{ font-family:'IBM Plex Mono'; font-weight:600; margin-left:auto; color:var(--ink-60); }
+
+  /* ---------- SECTION 4: position bars ---------- */
+  .pos-row{
+    display:grid;
+    grid-template-columns:110px 1fr 90px;
+    gap:18px;
+    align-items:center;
+    padding:16px 0;
+    border-bottom:1px dashed var(--ink-12);
+  }
+  .pos-row:last-child{ border-bottom:none; }
+  .pos-name{ font-family:'Big Shoulders Display'; font-weight:700; font-size:18px; }
+  .pos-track{ height:14px; background:var(--track); border-radius:99px; overflow:hidden; position:relative; }
+  .pos-fill{ height:100%; border-radius:99px; }
+  .pos-pct{ font-family:'IBM Plex Mono'; font-weight:600; font-size:15px; text-align:right; }
+  .pos-obs{ grid-column:1/-1; font-size:12.5px; color:var(--ink-60); margin-top:-6px; }
+
+  /* ---------- SECTION 5: pair cards ---------- */
+  .pair-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .pair-card{
+    background:var(--card);
+    border:1px solid var(--ink-12);
+    border-radius:16px;
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .pair-card .badge-row{ display:flex; align-items:center; gap:12px; }
+  .rank-badge{
+    width:38px; height:38px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Big Shoulders Display'; font-weight:800; font-size:16px;
+    border:2px solid var(--court);
+    color:var(--court);
+    flex:0 0 auto;
+  }
+  .rank-badge.r1{ background:var(--lime); border-color:var(--court); color:var(--ink); }
+  .pair-card .p-name{ font-size:16px; font-weight:800; line-height:1.25; }
+  .pair-card .p-stats{
+    display:flex;
+    gap:16px;
+    padding:14px 0;
+    border-top:1px dashed var(--ink-12);
+    border-bottom:1px dashed var(--ink-12);
+  }
+  .pair-card .p-stat{ display:flex; flex-direction:column; gap:2px; }
+  .pair-card .p-stat .n{ font-family:'IBM Plex Mono'; font-weight:600; font-size:17px; }
+  .pair-card .p-stat .l{ font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-60); }
+  .p-block-title{ font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-60); font-weight:700; margin-bottom:8px; }
+  .p-list{ list-style:none; display:flex; flex-direction:column; gap:7px; }
+  .p-list li{ font-size:13px; display:flex; gap:8px; align-items:flex-start; }
+  .p-list.good li::before{ content:"✓"; color:var(--court); font-weight:700; flex:0 0 auto; }
+  .p-list.focus li::before{ content:"→"; color:var(--ink); font-weight:700; flex:0 0 auto; }
+  .p-list.focus li{ font-weight:600; }
+  .p-context{ font-size:12.5px; color:var(--ink-60); font-style:italic; }
+
+  /* ---------- SECTION 6: strategic observation cards ---------- */
+  .obs-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .obs-card{
+    background:var(--card);
+    border:1px solid var(--ink-12);
+    border-radius:14px;
+    padding:22px;
+  }
+  .obs-card.highlight{ border:1.5px solid var(--court); }
+  .obs-kicker{ font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--court); font-weight:600; margin-bottom:8px; }
+  .obs-name{ font-family:'Big Shoulders Display'; font-weight:800; font-size:22px; margin-bottom:12px; }
+  .obs-card ul{ list-style:none; display:flex; flex-direction:column; gap:7px; }
+  .obs-card li{ font-size:13px; color:var(--ink-60); padding-left:14px; position:relative; }
+  .obs-card li::before{ content:"–"; position:absolute; left:0; color:var(--ink-35); }
+  .obs-metric-row{ display:flex; gap:14px; margin-top:12px; }
+  .obs-metric{ background:var(--track); border-radius:8px; padding:8px 12px; }
+  .obs-metric .m-n{ font-family:'IBM Plex Mono'; font-weight:600; font-size:15px; }
+  .obs-metric .m-l{ font-size:9.5px; text-transform:uppercase; color:var(--ink-60); letter-spacing:0.05em; }
+
+  /* ---------- SECTION 7: targets table ---------- */
+  .targets-table .table-wrap table td:last-child,
+  .targets-table .table-wrap table th:last-child{ text-align:right; }
+  .target-cell{ display:flex; align-items:center; justify-content:flex-end; gap:8px; }
+  .target-arrow{ color:var(--court); font-weight:700; }
+  .target-val{ font-family:'IBM Plex Mono'; font-weight:600; }
+  .target-val.new{ color:var(--court); background:var(--court-08); padding:3px 9px; border-radius:99px; }
+
+  /* ---------- Footer / main message ---------- */
+  .message-banner{
+    margin-top:56px;
+    background:var(--lime);
+    border-radius:16px;
+    padding:36px 34px;
+    color:var(--ink);
+  }
+  .message-banner .mb-label{ font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; font-weight:700; margin-bottom:12px; opacity:0.75; }
+  .message-banner p{ font-family:'Big Shoulders Display'; font-weight:700; font-size:clamp(22px,3.4vw,30px); line-height:1.22; max-width:760px; }
+
+  .footer-note{
+    margin-top:26px;
+    padding:20px 4px 0;
+    font-size:12px;
+    color:var(--ink-60);
+    line-height:1.6;
+    border-top:1px dashed var(--ink-12);
+    padding-top:22px;
+  }
+
+  @media (max-width:720px){
+    .stat-grid{ grid-template-columns:repeat(2,1fr); }
+    .status-explain{ grid-template-columns:repeat(2,1fr); }
+    .contrib-legend{ grid-template-columns:1fr; }
+    .pair-cards{ grid-template-columns:1fr; }
+    .obs-grid{ grid-template-columns:1fr; }
+    .pos-row{ grid-template-columns:1fr; gap:8px; }
+    .pos-pct{ text-align:left; }
+    table{ font-size:12px; }
+    thead th, tbody td{ padding:10px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow"><span class="dot"></span>Performance Data · 3 Matches Played</div>
+     <h1>Bective 2 <span class="accent">Mixed League</span> 2026</h1>
+    <div class="subline">
+      <p><strong>Objective performance analysis</strong> after three league matches.</p>
+      <p>Goal: identify strengths, measurable improvement areas, and priorities for the final two fixtures.</p>
+    </div>
+    <div class="court-strip"></div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="net-divider"><div class="line"></div><div class="post"></div><span class="tag">Section 01</span><div class="post"></div><div class="line"></div></div>
+
+  <div class="section-label">Team Record</div>
+  <h2 class="section-title">Team Performance Summary</h2>
+  <p class="section-desc">Aggregate results across all three matches played so far this season.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-label">Matches Played</div><div class="stat-value">3</div></div>
+    <div class="stat-card"><div class="stat-label">Matches Won</div><div class="stat-value win">0</div></div>
+    <!-- <div class="stat-card"><div class="stat-label">Matches Lost</div><div class="stat-value lost">3</div></div> -->
+    <div class="stat-card"><div class="stat-label">Sets Won</div><div class="stat-value win">3</div></div>
+    <div class="stat-card"><div class="stat-label">Sets Lost</div><div class="stat-value lost">18</div></div>
+    <div class="stat-card"><div class="stat-label">Games Won</div><div class="stat-value win">60</div></div>
+    <div class="stat-card"><div class="stat-label">Games Lost</div><div class="stat-value lost">120</div></div>
+    <div class="stat-card"><div class="stat-label">Game Win Rate</div><div class="stat-value">33.3%</div></div>
+  </div>
+
+  <div class="matches-row">
+    <div>
+      <div class="rl">Doubles Matches Won</div>
+      <div class="rv">0 / 9</div>
+    </div>
+    <div class="balls">
+      <div class="ball pending"></div><div class="ball pending"></div><div class="ball pending"></div>
+      <div class="ball pending"></div><div class="ball pending"></div><div class="ball pending"></div>
+      <div class="ball pending"></div><div class="ball pending"></div><div class="ball pending"></div>
+    </div>
+  </div>
+
+  <div class="insight-callout">
+    <span class="il-label">Key Insight</span>
+    Bective 2 has shown competitiveness, but the data highlights a need to increase conversion of <b>games into sets</b> and <b>match wins</b>.
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="net-divider"><div class="line"></div><div class="post"></div><span class="tag">Section 02</span><div class="post"></div><div class="line"></div></div>
+
+  <div class="section-label">Pair Ranking</div>
+  <h2 class="section-title">Doubles Pair Performance</h2>
+  <p class="section-desc">Pairs ranked by game production, with competitive context on partnership status.</p>
+
+  <!-- RESPONSIVE MOBILE WRAPPER START -->
+<div style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 16px;">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Pair</th><th>Status</th><th>Matches</th><th>Sets W–L</th><th>Games W–L</th><th>Game Win %</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="rank">01</td>
+          <td class="pair-name">Julia / Alan</td>
+          <td><span class="status-pill status-established">Established Pair</span></td>
+          <td>3</td><td>3–6</td><td>37–48</td>
+          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:43.5%"></div></div><span class="mini-bar-pct">43.5%</span></div></td>
+        </tr>
+        <tr>
+          <td class="rank">02</td>
+          <td class="pair-name">Antonina / Osvaldo</td>
+          <td><span class="status-pill status-established">Established Pair</span></td>
+          <td>2</td><td>0–4</td><td>12–24</td>
+          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:33.3%"></div></div><span class="mini-bar-pct">33.3%</span></div></td>
+        </tr>
+        <tr>
+          <td class="rank">03</td>
+          <td class="pair-name">Olga / Ian</td>
+          <td><span class="status-pill status-substitute">Substitute Combination</span></td>
+          <td>1</td><td>0–2</td><td>4–12</td>
+          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:25%"></div></div><span class="mini-bar-pct">25.0%</span></div></td>
+        </tr>
+        <tr>
+          <td class="rank">04</td>
+          <td class="pair-name">Olga / Pavel</td>
+          <td><span class="status-pill status-nominated">Nominated Pair</span></td>
+          <td>1</td><td>0–2</td><td>3–12</td>
+          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:20%"></div></div><span class="mini-bar-pct">20.0%</span></div></td>
+        </tr>
+        <tr>
+          <td class="rank">05</td>
+          <td class="pair-name">Rona / Daniel</td>
+          <td><span class="status-pill status-substitute">Substitute Combination</span></td>
+          <td>1</td><td>0–2</td><td>3–12</td>
+          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:20%"></div></div><span class="mini-bar-pct">20.0%</span></div></td>
+        </tr>
+        <tr>
+          <td class="rank">06</td>
+          <td class="pair-name">Olga / Osvaldo</td>
+          <td><span class="status-pill status-alternate">Alternate Combination</span></td>
+          <td>1</td><td>0–2</td><td>1–12</td>
+          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:7.7%"></div></div><span class="mini-bar-pct">7.7%</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="padding:0 20px 20px;">
+      <div class="status-explain">
+        <div class="se-item"><b>Established Pair</b>Regular league partnership.</div>
+        <div class="se-item"><b>Nominated Pair</b>Official registered partnership.</div>
+        <div class="se-item"><b>Substitute Combination</b>Pair created when substitute players were required.</div>
+        <div class="se-item"><b>Alternate Combination</b>Pair created when a nominated partner was unavailable.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- SECTION 3 -->
+  <div class="net-divider"><div class="line"></div><div class="post"></div><span class="tag">Section 03</span><div class="post"></div><div class="line"></div></div>
+
+  <div class="section-label">Games Won Breakdown</div>
+  <h2 class="section-title">Contribution to Team Games Won</h2>
+  <p class="section-desc">Source of Bective's 60 winning games this season, by pair.</p>
+
+  <div class="contrib-bar">
+    <div class="contrib-seg" style="width:61.7%; background:var(--court); color:#F2F5EE;">Julia / Alan · 61.7%</div>
+    <div class="contrib-seg" style="width:20%; background:var(--lime); color:var(--ink);">20.0%</div>
+    <div class="contrib-seg" style="width:6.7%; background:#AEE0C4;"></div>
+    <div class="contrib-seg" style="width:5%; background:#CFE3D6;"></div>
+    <div class="contrib-seg" style="width:5%; background:var(--track);"></div>
+    <div class="contrib-seg" style="width:1.7%; background:var(--ink-12);"></div>
+  </div>
+
+  <div class="contrib-legend">
+    <div class="cl-item"><span class="sw" style="background:var(--court);"></span>Julia / Alan<span class="cl-num">37 · 61.7%</span></div>
+    <div class="cl-item"><span class="sw" style="background:var(--lime);"></span>Antonina / Osvaldo<span class="cl-num">12 · 20.0%</span></div>
+    <div class="cl-item"><span class="sw" style="background:#AEE0C4;"></span>Olga / Ian<span class="cl-num">4 · 6.7%</span></div>
+    <div class="cl-item"><span class="sw" style="background:#CFE3D6;"></span>Olga / Pavel<span class="cl-num">3 · 5.0%</span></div>
+    <div class="cl-item"><span class="sw" style="background:var(--track); border:1px solid var(--ink-12);"></span>Rona / Daniel<span class="cl-num">3 · 5.0%</span></div>
+    <div class="cl-item"><span class="sw" style="background:var(--ink-12);"></span>Olga / Osvaldo<span class="cl-num">1 · 1.7%</span></div>
+  </div>
+
+  <div class="insight-callout" style="margin-top:20px;">
+    <span class="il-label">Key Insight</span>
+    Julia / Alan generated <b>37 of Bective's 60 winning games</b>, accounting for more than half of the team's successful games.
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="net-divider"><div class="line"></div><div class="post"></div><span class="tag">Section 04</span><div class="post"></div><div class="line"></div></div>
+
+  <div class="section-label">Doubles Order Comparison</div>
+  <h2 class="section-title">Performance by Doubles</h2>
+  <p class="section-desc">Comparing game production across the three doubles positions in the order of play.</p>
+
+  <div class="card">
+    <div class="pos-row">
+      <div class="pos-name">1st Doubles</div>
+      <div class="pos-track"><div class="pos-fill" style="width:43.5%; background:var(--court);"></div></div>
+      <div class="pos-pct">43.5%</div>
+      <div class="pos-obs">37 won – 48 lost · Strongest statistical area</div>
+    </div>
+    <div class="pos-row">
+      <div class="pos-name">2nd Doubles</div>
+      <div class="pos-track"><div class="pos-fill" style="width:33.3%; background:var(--lime);"></div></div>
+      <div class="pos-pct">33.3%</div>
+      <div class="pos-obs">12 won – 24 lost · Competitive but needs more conversion</div>
+    </div>
+    <div class="pos-row">
+      <div class="pos-name">3rd Doubles</div>
+      <div class="pos-track"><div class="pos-fill" style="width:18.6%; background:var(--ink-35);"></div></div>
+      <div class="pos-pct">18.6%</div>
+      <div class="pos-obs">11 won – 48 lost · Biggest improvement opportunity</div>
+    </div>
+  </div>
+
+  <div class="insight-callout" style="margin-top:20px;">
+    <span class="il-label">Key Insight</span>
+    The largest opportunity is increasing contribution from the <b>lower doubles positions</b>.
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="net-divider"><div class="line"></div><div class="post"></div><span class="tag">Section 05</span><div class="post"></div><div class="line"></div></div>
+
+  <div class="section-label">Pair Profiles</div>
+  <h2 class="section-title">Pair Performance Cards</h2>
+  <p class="section-desc">A closer look at the season's top-producing pairings.</p>
+
+  <div class="pair-cards">
+    <div class="pair-card">
+      <div class="badge-row">
+        <div class="rank-badge r1">01</div>
+        <div class="p-name">Julia<br>/ Alan</div>
+      </div>
+      <div class="p-stats">
+        <div class="p-stat"><span class="n">3</span><span class="l">Matches</span></div>
+        <div class="p-stat"><span class="n">3</span><span class="l">Sets Won</span></div>
+        <div class="p-stat"><span class="n">37</span><span class="l">Games Won</span></div>
+        <div class="p-stat"><span class="n">43.5%</span><span class="l">Win Rate</span></div>
+      </div>
+      <div>
+        <div class="p-block-title">Strengths</div>
+        <ul class="p-list good">
+          <li>Highest game production</li>
+          <li>Only pair to win sets</li>
+          <li>61.7% of team winning games</li>
+        </ul>
+      </div>
+      <div>
+        <div class="p-block-title">Performance Focus</div>
+        <ul class="p-list focus">
+          <li>Improve deciding-set performance</li>
+          <li>Increase pressure during opponent service games</li>
+          <li>Win more key pressure games</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pair-card">
+      <div class="badge-row">
+        <div class="rank-badge">02</div>
+        <div class="p-name">Antonina<br>/ Osvaldo</div>
+      </div>
+      <div class="p-stats">
+        <div class="p-stat"><span class="n">2</span><span class="l">Matches</span></div>
+        <div class="p-stat"><span class="n">12</span><span class="l">Games Won</span></div>
+        <div class="p-stat"><span class="n">33.3%</span><span class="l">Win Rate</span></div>
+      </div>
+      <div>
+        <div class="p-block-title">Strengths</div>
+        <ul class="p-list good">
+          <li>Second-highest game production</li>
+          <li>Competitive against strong opponents</li>
+        </ul>
+      </div>
+      <div>
+        <div class="p-block-title">Performance Focus</div>
+        <ul class="p-list focus">
+          <li>Increase games won per set</li>
+          <li>Improve service-game consistency</li>
+          <li>Create more break opportunities on return</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pair-card">
+      <div class="badge-row">
+        <div class="rank-badge">03</div>
+        <div class="p-name">Olga<br>/ Pavel</div>
+      </div>
+      <div class="p-stats">
+        <div class="p-stat"><span class="n">1</span><span class="l">Matches</span></div>
+        <div class="p-stat"><span class="n">3</span><span class="l">Games Won</span></div>
+      </div>
+      <div>
+        <div class="p-block-title">Context</div>
+        <p class="p-context">Official nominated partnership. Limited sample size after one match together.</p>
+      </div>
+      <div>
+        <div class="p-block-title">Performance Focus</div>
+        <ul class="p-list focus">
+          <li>Increase games won per match — target 6+</li>
+          <li>Build stronger partnership routines</li>
+          <li>Improve service-game stability</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="net-divider"><div class="line"></div><div class="post"></div><span class="tag">Section 06</span><div class="post"></div><div class="line"></div></div>
+
+  <div class="section-label">Season Read</div>
+  <h2 class="section-title">Strategic Observations</h2>
+  <p class="section-desc">What the data shows after three matches.</p>
+
+  <div class="obs-grid">
+    <div class="obs-card highlight">
+      <div class="obs-kicker">Strongest Statistical Contribution</div>
+      <div class="obs-name">Julia / Alan</div>
+      <ul>
+        <li>Highest game win percentage</li>
+        <li>Only partnership to win sets</li>
+        <li>Highest contribution to team games won</li>
+      </ul>
+    </div>
+    <div class="obs-card">
+      <div class="obs-kicker">Strongest Supporting Pair</div>
+      <div class="obs-name">Antonina / Osvaldo</div>
+      <ul>
+        <li>Second-highest contribution</li>
+        <li>Established partnership with competitive results</li>
+      </ul>
+    </div>
+    <div class="obs-card">
+      <div class="obs-kicker">Main Improvement Area</div>
+      <div class="obs-name">3rd Doubles</div>
+      <ul>
+        <li>Current performance below other positions</li>
+        <li>Biggest opportunity to raise team competitiveness</li>
+      </ul>
+      <div class="obs-metric-row">
+        <div class="obs-metric"><div class="m-n">11–48</div><div class="m-l">Games W–L</div></div>
+        <div class="obs-metric"><div class="m-n">18.6%</div><div class="m-l">Win Rate</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="net-divider"><div class="line"></div><div class="post"></div><span class="tag">Section 07</span><div class="post"></div><div class="line"></div></div>
+
+  <div class="section-label">Looking Ahead</div>
+  <h2 class="section-title">Final Two Match Targets</h2>
+  <p class="section-desc">Measurable targets for the remaining two fixtures, based on current season data.</p>
+
+ <div class="table-wrap targets-table">
+  <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="border-bottom: 2px solid #E4E8DA;">
+        <th style="text-align: left; padding: 12px 8px;">Area</th>
+        <th style="text-align: right; padding: 12px 8px;">Current</th>
+        <th style="text-align: right; padding: 12px 8px; padding-right: 16px;">Target</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom: 1px solid #E4E8DA;">
+        <td style="padding: 14px 8px;">Team Game Win Rate</td>
+        <td class="mono" style="text-align: right; padding: 14px 8px;">33.3%</td>
+        <td style="padding: 14px 8px; padding-right: 16px;">
+          <div class="target-cell" style="display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+            <span class="target-arrow" style="opacity: 0.7;">→</span>
+            <span class="target-val new">40%+</span>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom: 1px solid #E4E8DA;">
+        <td style="padding: 14px 8px;">Average Games Won Per Match</td>
+        <td class="mono" style="text-align: right; padding: 14px 8px;">20</td>
+        <td style="padding: 14px 8px; padding-right: 16px;">
+          <div class="target-cell" style="display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+            <span class="target-arrow" style="opacity: 0.7;">→</span>
+            <span class="target-val new">24+</span>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom: 1px solid #E4E8DA;">
+        <td style="padding: 14px 8px;">Average Sets Won Per Match</td>
+        <td class="mono" style="text-align: right; padding: 14px 8px;">1</td>
+        <td style="padding: 14px 8px; padding-right: 16px;">
+          <div class="target-cell" style="display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+            <span class="target-arrow" style="opacity: 0.7;">→</span>
+            <span class="target-val new">2+</span>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom: 1px solid #E4E8DA;">
+        <td style="padding: 14px 8px;">2nd Doubles Games Per Match</td>
+        <td class="mono" style="text-align: right; padding: 14px 8px;">6</td>
+        <td style="padding: 14px 8px; padding-right: 16px;">
+          <div class="target-cell" style="display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+            <span class="target-arrow" style="opacity: 0.7;">→</span>
+            <span class="target-val new">8+</span>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom: 1px solid #E4E8DA;">
+        <td style="padding: 14px 8px;">3rd Doubles Games Per Match</td>
+        <td class="mono" style="text-align: right; padding: 14px 8px;">3.7</td>
+        <td style="padding: 14px 8px; padding-right: 16px;">
+          <div class="target-cell" style="display: flex; align-items: center; justify-content: flex-end; gap: 12px;">
+            <span class="target-arrow" style="opacity: 0.7;">→</span>
+            <span class="target-val new">5–6</span>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <!-- MAIN MESSAGE -->
+  <div class="message-banner">
+    <div class="mb-label">Main Message</div>
+    <p>“Use performance data to maximise pair effectiveness and convert competitive games into more sets and match wins.”</p>
+  </div>
+
+  <div class="footer-note">
+    Statistics based on the first three Mixed League matches. Pair statuses distinguish established partnerships, nominated partnerships, substitute combinations, and alternate combinations to provide appropriate competitive context.
+  </div>
+
+</div>
+</body>
+</html>
