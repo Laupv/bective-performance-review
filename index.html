@@ -229,7 +229,8 @@
   /* ---------- TABLE (Section 2) ---------- */
   .mobile-table-container {
   width:100%;
-  overflow:hidden;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
   }
   .swipe-hint {
   display:none;
@@ -245,21 +246,21 @@
     display:block;
    } 
   }
-  
   .table-wrap{
   background:var(--card);
   border:1px solid var(--ink-12);
   border-radius:14px;
-  overflow:hidden;
-  }
-  .table-scroll {
-  width:100%;
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
   }
-  table{
-  min-width:700px;
-  border-collapse:collapse;
+  .table-scroll {
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  }
+  table{ 
+  width:max-content; 
+  min-width:700px; 
+  border-collapse:collapse; 
   }
   thead th{
     text-align:left;
@@ -531,12 +532,9 @@
 
   <!-- RESPONSIVE MOBILE WRAPPER START -->
 <div class="mobile-table-container">
-
   <div class="swipe-hint">← Swipe to see full table →</div>
-
-  <div class="table-scroll">
-    <div class="table-wrap">
-      <table>
+  <div class="table-wrap">
+    <table>
       <thead>
         <tr><th>#</th><th>Pair</th><th>Status</th><th>Matches</th><th>Sets W–L</th><th>Games W–L</th><th>Game Win %</th></tr>
       </thead>
@@ -591,7 +589,6 @@
         <div class="se-item"><b>Nominated Pair</b>Official registered partnership.</div>
         <div class="se-item"><b>Substitute Combination</b>Pair created when substitute players were required.</div>
         <div class="se-item"><b>Alternate Combination</b>Pair created when a nominated partner was unavailable.</div>
-        </div>
       </div>
     </div>
   </div>
