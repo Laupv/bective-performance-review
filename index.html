@@ -227,6 +227,11 @@
   .insight-callout b{ color:var(--lime); }
 
   /* ---------- TABLE (Section 2) ---------- */
+  .mobile-table-container {
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  }
   .table-wrap{
     background:var(--card);
     border:1px solid var(--ink-12);
@@ -511,8 +516,8 @@
   <p class="section-desc">Pairs ranked by game production, with competitive context on partnership status.</p>
 
   <!-- RESPONSIVE MOBILE WRAPPER START -->
-<div style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 16px;">
-  <div class="table-wrap" table-scroll>
+<div class="mobile-table-container">
+  <div class="table-wrap">
     <table>
       <thead>
         <tr><th>#</th><th>Pair</th><th>Status</th><th>Matches</th><th>Sets W–L</th><th>Games W–L</th><th>Game Win %</th></tr>
