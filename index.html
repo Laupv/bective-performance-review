@@ -247,32 +247,32 @@
    } 
   }
 
-  /* Excel-style frozen + scrolling table layout */
+/* Excel-style frozen table layout */
 .mobile-table-container {
   display:flex;
   width:100%;
-  overflow:hidden;
+  align-items:flex-start;
 }
 
 .frozen-table {
   flex:0 0 auto;
+  width:190px;
 }
 
 .scroll-table {
   flex:1;
+  min-width:0;
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
 }
 
-.frozen-table .table-wrap,
-.scroll-table .table-wrap {
-  height:100%;
-}
-
 .frozen-table table,
 .scroll-table table {
-  width:max-content;
-  min-width:100%;
+  width:100%;
+}
+
+.scroll-table table {
+  min-width:650px;
 }
   
   .table-wrap th:nth-child(1),
