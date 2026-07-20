@@ -232,6 +232,20 @@
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
   }
+  .swipe-hint {
+  display:none;
+  text-align:right;
+  font-family:'IBM Plex Mono';
+  font-size:11px;
+  color:var(--ink-60);
+  margin-bottom:8px;
+  }
+
+  @media (max-width:600px){
+  .swipe-hint {
+    display:block;
+   } 
+  }
   .table-wrap{
   background:var(--card);
   border:1px solid var(--ink-12);
@@ -518,6 +532,7 @@
 
   <!-- RESPONSIVE MOBILE WRAPPER START -->
 <div class="mobile-table-container">
+  <div class="swipe-hint">← Swipe to see full table →</div>
   <div class="table-wrap">
     <table>
       <thead>
