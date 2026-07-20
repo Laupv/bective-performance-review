@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -246,6 +246,34 @@
     display:block;
    } 
   }
+
+  /* Excel-style frozen + scrolling table layout */
+.mobile-table-container {
+  display:flex;
+  width:100%;
+  overflow:hidden;
+}
+
+.frozen-table {
+  flex:0 0 auto;
+}
+
+.scroll-table {
+  flex:1;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+.frozen-table .table-wrap,
+.scroll-table .table-wrap {
+  height:100%;
+}
+
+.frozen-table table,
+.scroll-table table {
+  width:max-content;
+  min-width:100%;
+}
   
   .table-wrap th:nth-child(1),
   .table-wrap td:nth-child(1) {
@@ -567,56 +595,147 @@
   <!-- RESPONSIVE MOBILE WRAPPER START -->
 <div class="mobile-table-container">
   <div class="swipe-hint">← Swipe to see full table →</div>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr><th>#</th><th>Pair</th><th>Status</th><th>Matches</th><th>Sets W–L</th><th>Games W–L</th><th>Game Win %</th></tr>
-      </thead>
-      <tbody>
+  <div class="frozen-table">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Pair</th></tr>
+        </thead>
+        <tbody>
         <tr>
           <td class="rank">01</td>
-          <td class="pair-name">Julia / Alan</td>
-          <td><span class="status-pill status-established">Established Pair</span></td>
-          <td>3</td><td>3–6</td><td>37–48</td>
-          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:43.5%"></div></div><span class="mini-bar-pct">43.5%</span></div></td>
+         <td class="pair-name">Julia / Alan</td>
         </tr>
         <tr>
           <td class="rank">02</td>
           <td class="pair-name">Antonina / Osvaldo</td>
-          <td><span class="status-pill status-established">Established Pair</span></td>
-          <td>2</td><td>0–4</td><td>12–24</td>
-          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:33.3%"></div></div><span class="mini-bar-pct">33.3%</span></div></td>
         </tr>
         <tr>
           <td class="rank">03</td>
           <td class="pair-name">Olga / Ian</td>
-          <td><span class="status-pill status-substitute">Substitute Combination</span></td>
-          <td>1</td><td>0–2</td><td>4–12</td>
-          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:25%"></div></div><span class="mini-bar-pct">25.0%</span></div></td>
         </tr>
         <tr>
           <td class="rank">04</td>
           <td class="pair-name">Olga / Pavel</td>
-          <td><span class="status-pill status-nominated">Nominated Pair</span></td>
-          <td>1</td><td>0–2</td><td>3–12</td>
-          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:20%"></div></div><span class="mini-bar-pct">20.0%</span></div></td>
         </tr>
         <tr>
           <td class="rank">05</td>
           <td class="pair-name">Rona / Daniel</td>
-          <td><span class="status-pill status-substitute">Substitute Combination</span></td>
-          <td>1</td><td>0–2</td><td>3–12</td>
-          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:20%"></div></div><span class="mini-bar-pct">20.0%</span></div></td>
         </tr>
         <tr>
           <td class="rank">06</td>
           <td class="pair-name">Olga / Osvaldo</td>
-          <td><span class="status-pill status-alternate">Alternate Combination</span></td>
-          <td>1</td><td>0–2</td><td>1–12</td>
-          <td><div class="mini-bar-wrap"><div class="mini-bar-track"><div class="mini-bar-fill" style="width:7.7%"></div></div><span class="mini-bar-pct">7.7%</span></div></td>
         </tr>
-      </tbody>
+            </tbody>
     </table>
+  </div>
+</div>
+
+<div class="scroll-table">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Matches</th>
+          <th>Sets W–L</th>
+          <th>Games W–L</th>
+          <th>Game Win %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="status-pill status-established">Established Pair</span></td>
+          <td>3</td>
+          <td>3–6</td>
+          <td>37–48</td>
+          <td>
+            <div class="mini-bar-wrap">
+            <div class="mini-bar-track">
+            <div class="mini-bar-fill" style="width:43.5%"></div>
+            </div>
+            <span class="mini-bar-pct">43.5%</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td><span class="status-pill status-established">Established Pair</span></td>
+          <td>2</td>
+          <td>0–4</td>
+          <td>12–24</td>
+          <td>
+            <div class="mini-bar-wrap">
+            <div class="mini-bar-track">
+            <div class="mini-bar-fill" style="width:33.3%"></div>
+            </div>
+            <span class="mini-bar-pct">33.3%</span>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><span class="status-pill status-substitute">Substitute Combination</span></td>
+          <td>1</td>
+          <td>0–2</td>
+          <td>4–12</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="width:25%"></div>
+              </div>
+              <span class="mini-bar-pct">25.0%</span>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><span class="status-pill status-nominated">Nominated Pair</span></td>
+          <td>1</td>
+          <td>0–2</td>
+          <td>3–12</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="width:20%"></div>
+              </div>
+              <span class="mini-bar-pct">20.0%</span>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><span class="status-pill status-substitute">Substitute Combination</span></td>
+          <td>1</td>
+          <td>0–2</td>
+          <td>3–12</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="width:20%"></div>
+              </div>
+              <span class="mini-bar-pct">20.0%</span>
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td><span class="status-pill status-alternate">Alternate Combination</span></td>
+          <td>1</td>
+          <td>0–2</td>
+          <td>1–12</td>
+          <td>
+            <div class="mini-bar-wrap">
+              <div class="mini-bar-track">
+                <div class="mini-bar-fill" style="width:7.7%"></div>
+              </div>
+              <span class="mini-bar-pct">7.7%</span>
+            </div>
+          </td>
+        </tr>
+
+        </tbody>
+    </table>
+
     <div style="padding:0 20px 20px;">
       <div class="status-explain">
         <div class="se-item"><b>Established Pair</b>Regular league partnership.</div>
@@ -625,6 +744,7 @@
         <div class="se-item"><b>Alternate Combination</b>Pair created when a nominated partner was unavailable.</div>
       </div>
     </div>
+
   </div>
 </div>
 
