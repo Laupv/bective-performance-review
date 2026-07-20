@@ -246,16 +246,27 @@
     display:block;
    } 
   }
-  .table-wrap th:nth-child(2),
-  .table-wrap td:nth-child(2) {
-  position: sticky;
-  left: 42px;
-  background: var(--card);
-  z-index: 3;
+  /* Freeze first two columns */
+  .table-wrap th:nth-child(1),
+  .table-wrap td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    background: var(--card);
+    z-index: 3;
   }
 
+  .table-wrap th:nth-child(2),
+  .table-wrap td:nth-child(2) {
+    position: sticky;
+    left: 45px;
+    background: var(--card);
+    z-index: 3;
+  }
+
+  /* Keep header above body */
+  .table-wrap thead th:nth-child(1),
   .table-wrap thead th:nth-child(2) {
-  z-index: 4;
+    z-index: 5;
   }
   .table-wrap{
   background:var(--card);
