@@ -247,16 +247,24 @@
    } 
   }
 
-/* Excel-style frozen table layout */
+  /* Frozen + scrolling table layout */
 .mobile-table-container {
+  width:100%;
+}
+
+.swipe-hint {
+  text-align:right;
+  margin-bottom:8px;
+}
+
+.table-row-layout {
   display:flex;
   width:100%;
   align-items:flex-start;
 }
 
 .frozen-table {
-  flex:0 0 auto;
-  width:190px;
+  flex:0 0 190px;
 }
 
 .scroll-table {
@@ -269,10 +277,6 @@
 .frozen-table table,
 .scroll-table table {
   width:100%;
-}
-
-.scroll-table table {
-  min-width:650px;
 }
   
   .table-wrap th:nth-child(1),
@@ -595,6 +599,7 @@
   <!-- RESPONSIVE MOBILE WRAPPER START -->
 <div class="mobile-table-container">
   <div class="swipe-hint">← Swipe to see full table →</div>
+  <div class="table-row-layout">
   <div class="frozen-table">
     <div class="table-wrap">
       <table>
@@ -745,8 +750,9 @@
       </div>
     </div>
 
+      </div>
+    </div>
   </div>
-</div>
 </div>
 
   <!-- SECTION 3 -->
